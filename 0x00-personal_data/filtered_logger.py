@@ -25,6 +25,7 @@ class RedactingFormatter(logging.Formatter):
     SEPARATOR = ";"
 
     def __init__(self, fields):
+        '''this is the init function'''
         super(RedactingFormatter, self).__init__(self.FORMAT)
         self.fields = fields
 
