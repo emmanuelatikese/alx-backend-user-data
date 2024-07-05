@@ -32,4 +32,4 @@ class RedactingFormatter(logging.Formatter):
         '''Here goes nothing'''
         record.msg = filter_datum(
             self.fields, self.REDACTION, record.getMessage(), self.SEPARATOR)
-        return super(RedactingFormatter, self).format(record)
+        return super().format(record)
