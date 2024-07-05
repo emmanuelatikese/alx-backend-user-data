@@ -18,7 +18,7 @@ def filter_datum(fields: List[Union[str, str]], redaction: str,
 
 class RedactingFormatter(logging.Formatter):
     """ Redacting Formatter class
-        """
+    """
 
     REDACTION = "***"
     FORMAT = "[HOLBERTON] %(name)s %(levelname)s %(asctime)-15s: %(message)s"
@@ -30,7 +30,7 @@ class RedactingFormatter(logging.Formatter):
         self.fields = fields
 
     def format(self, record: logging.LogRecord) -> str:
-        '''Here goes nothing'''
-        record.msg = filter_datum(
-            self.fields, self.REDACTION, record.getMessage(), self.SEPARATOR)
-        return super().format(record)
+        '''here"s where the format begins'''
+        record.msg = filter_datum(self.fields, self.REDACTION,
+                                  record.getMessage(), self.SEPARATOR)
+        return super(RedactingFormatter, self).format(record)
