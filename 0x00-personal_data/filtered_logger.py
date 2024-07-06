@@ -3,7 +3,6 @@
 import re
 from typing import Union, List, Tuple
 import logging
-import csv
 PII_FIELDS = ('email', 'phone', 'ssn', 'password', 'ip')
 
 
@@ -23,8 +22,8 @@ def get_logger() -> logging.Logger:
     logger = logging.getLogger("user_data")
     logger.setLevel(logging.INFO)
     logger.propagate = False
-    streamHandler = logging.StreamHandler()
-    streamHandler.setFormatter(RedactingFormatter(list(PII_FIELDS)))
+    stream_handler = logging.StreamHandler()
+    stream_handler.setFormatter(RedactingFormatter(list(PII_FIELDS)))
 
 
 class RedactingFormatter(logging.Formatter):
@@ -45,4 +44,3 @@ class RedactingFormatter(logging.Formatter):
         record.msg = filter_datum(self.fields, self.REDACTION,
                                   record.getMessage(), self.SEPARATOR)
         return super(RedactingFormatter, self).format(record)
-
