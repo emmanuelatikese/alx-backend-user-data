@@ -21,7 +21,7 @@ def filter_datum(fields: List[Union[str, str]], redaction: str,
 
 
 def get_db() -> mysql.connector.connection.MySQLConnection:
-    '''gettting db using sql lib'''
+    '''getting db using sql lib'''
     cred = mysql.connector.connection.MySQLConnection(
         host=os.getenv('PERSONAL_DATA_DB_HOST'),
         user=os.getenv('PERSONAL_DATA_DB_USERNAME'),
