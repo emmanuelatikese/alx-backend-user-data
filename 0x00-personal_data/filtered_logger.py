@@ -22,11 +22,15 @@ def filter_datum(fields: List[Union[str, str]], redaction: str,
 
 def get_db() -> mysql.connector.connection.MySQLConnection:
     '''getting db using sql lib'''
+    _host = os.getenv('PERSONAL_DATA_DB_HOST'),
+    _user = os.getenv('PERSONAL_DATA_DB_USERNAME'),
+    _password = os.getenv('PERSONAL_DATA_DB_PASSWORD'),
+    _database = os.getenv('my_db')
     cred = mysql.connector.connection.MySQLConnection(
-        host=os.getenv('PERSONAL_DATA_DB_HOST'),
-        user=os.getenv('PERSONAL_DATA_DB_USERNAME'),
-        password=os.getenv('PERSONAL_DATA_DB_PASSWORD'),
-        database=os.getenv('my_db')
+        host=_host,
+        user=_user,
+        password=_password,
+        database=_database,
     )
     return cred
 
