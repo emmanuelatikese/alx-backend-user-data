@@ -18,7 +18,7 @@ def filter_datum(fields: List[Union[str, str]], redaction: str,
     return separator.join(sp_mes)
 
 
-def get_logger() -> logging.Logger:
+def get_logger() -> str:
     '''getting logger'''
     logger = logging.getLogger("user_data")
     logger.setLevel(logging.INFO)
