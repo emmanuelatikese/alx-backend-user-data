@@ -24,7 +24,7 @@ def get_logger() -> logging.Logger:
     logger.propagate = False
     stream_handler = logging.StreamHandler()
     stream_handler.setFormatter(RedactingFormatter(list(PII_FIELDS)))
-
+    return logger
 
 class RedactingFormatter(logging.Formatter):
     """ Redacting Formatter class
