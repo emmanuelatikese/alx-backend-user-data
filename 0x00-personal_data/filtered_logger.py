@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 '''working on personal data'''
 import re
-from typing import Union, List, Tuple
+from typing import Union, List
 import logging
 
 
