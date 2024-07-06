@@ -20,9 +20,9 @@ def filter_datum(fields: List[Union[str, str]], redaction: str,
     return separator.join(sp_mes)
 
 
-def get_db() -> mysql.connector.connect:
+def get_db() -> mysql.connector.connection.MySQLConnection:
     '''getting db using sql lib'''
-    cred = mysql.connector.connect(
+    cred = mysql.connector.connection.MySQLConnection(
         host=os.getenv('PERSONAL_DATA_DB_HOST', 'localhost'),
         user=os.getenv('PERSONAL_DATA_DB_USERNAME', 'root'),
         password=os.getenv('PERSONAL_DATA_DB_PASSWORD', ''),
