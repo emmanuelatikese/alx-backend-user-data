@@ -3,7 +3,8 @@
 import re
 from typing import Union, List
 import logging
-
+import mysql.connector
+import os
 
 PII_FIELDS = ("name", "email", "phone", "ssn", "password")
 
@@ -17,6 +18,16 @@ def filter_datum(fields: List[Union[str, str]], redaction: str,
             if y in sp_mes[x]:
                 sp_mes[x] = re.sub(r'=\S*', f"={redaction}", sp_mes[x])
     return separator.join(sp_mes)
+
+
+def get_db() -> mysql.connector.connection.MySQLConnection:
+    '''gettting db using sql lib'''
+    return mysql.connector.connection.MySQLConnection(
+        host=os.getenv('PERSONAL_DATA_DB_HOST'),
+        user=os.getenv('PERSONAL_DATA_DB_USERNAME'),
+        password=os.getenv('PERSONAL_DATA_DB_PASSWORD'),
+        database=os.getenv('my_db')
+    )
 
 
 def get_logger() -> logging.Logger:
