@@ -5,7 +5,7 @@ from typing import Union, List
 import logging
 
 
-PII_FIELDS = ('email', 'phone', 'ssn', 'password', 'ip')
+PII_FIELDS = ("email", "phone", "ssn", "password", "ip")
 
 
 def filter_datum(fields: List[Union[str, str]], redaction: str,
