@@ -33,10 +33,10 @@ def get_logger() -> logging.Logger:
 
 def get_db() -> mysql.connector.connection.MySQLConnection:
     '''getting db using sql lib'''
-    _host = environ.get('PERSONAL_DATA_DB_HOST'),
-    _user = environ.get('PERSONAL_DATA_DB_USERNAME'),
-    _password = environ.get('PERSONAL_DATA_DB_PASSWORD'),
-    _database = environ.get('my_db')
+    _host = environ.get('PERSONAL_DATA_DB_HOST', 'localhost'),
+    _user = environ.get('PERSONAL_DATA_DB_USERNAME', 'root'),
+    _password = environ.get('PERSONAL_DATA_DB_PASSWORD', ''),
+    _database = environ.get('PERSONAL_DATA_DB_NAME')
     cred = mysql.connector.connection.MySQLConnection(
         host=_host,
         user=_user,
