@@ -3,6 +3,8 @@
 import re
 from typing import Union, List, Tuple
 import logging
+
+
 PII_FIELDS = ('email', 'phone', 'ssn', 'password', 'ip')
 
 
