@@ -4,7 +4,7 @@ import re
 from typing import Union, List
 import logging
 import mysql.connector
-import os
+from os import environ
 
 PII_FIELDS = ("name", "email", "phone", "ssn", "password")
 
@@ -22,10 +22,10 @@ def filter_datum(fields: List[Union[str, str]], redaction: str,
 
 def get_db() -> mysql.connector.connection.MySQLConnection:
     '''getting db using sql lib'''
-    _host = os.getenv('PERSONAL_DATA_DB_HOST'),
-    _user = os.getenv('PERSONAL_DATA_DB_USERNAME'),
-    _password = os.getenv('PERSONAL_DATA_DB_PASSWORD'),
-    _database = os.getenv('my_db')
+    _host = environ.get('PERSONAL_DATA_DB_HOST'),
+    _user = environ.get('PERSONAL_DATA_DB_USERNAME'),
+    _password = environ.get('PERSONAL_DATA_DB_PASSWORD'),
+    _database = environ.get('my_db')
     cred = mysql.connector.connection.MySQLConnection(
         host=_host,
         user=_user,
