@@ -31,10 +31,10 @@ def filtering_request() -> Optional[str]:
                 '/api/v1/unauthorized/', '/api/v1/forbidden/']
     if not auth.require_auth(request.path, all_path):
         return
-    if auth.authorization_header(request):
+    if not auth.authorization_header(request):
         abort(401)
         return
-    if auth.current_user(request):
+    if not auth.current_user(request):
         abort(403)
         return
 

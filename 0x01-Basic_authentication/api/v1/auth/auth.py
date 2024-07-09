@@ -30,4 +30,4 @@ class Auth:
     def current_user(self, request=None) -> TypeVar('User'):
         """returns Nones
         """
-        return
+        return None
