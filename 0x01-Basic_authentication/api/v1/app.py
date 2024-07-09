@@ -7,6 +7,7 @@ from api.v1.views import app_views
 from flask import Flask, jsonify, abort, request
 from flask_cors import (CORS, cross_origin)
 import os
+from typing import Optional
 
 
 app = Flask(__name__)
@@ -17,6 +18,26 @@ auth = None
 if getenv("AUTH_TYPE") == 'auth':
     from api.v1.auth.auth import Auth
     auth = Auth()
+
+
+@app.before_request
+def filtering_request() -> Optional[str]:
+    """ Filter requests based on authentication
+    """
+
+    if auth is None:
+        return
+    all_path = ['/api/v1/status/',
+                '/api/v1/unauthorized/', '/api/v1/forbidden/']
+    if not auth.require_auth(request.path, all_path):
+        return
+    if auth.authorization_header(request):
+        abort(401)
+        return
+    if auth.current_user(request):
+        abort(403)
+        return
+        
 
 
 @app.errorhandler(404)
@@ -39,26 +60,6 @@ def forbidden(error) -> str:
     """
     return jsonify({"error": "Forbidden"}), 403
 
-
-@app.before_request
-def filtering_request():
-    """ Filter requests based on authentication
-    """
-
-    if auth is None:
-        return
-    _require_auth = auth.require_auth(request.path,
-                                      ['/api/v1/status/',
-                                       '/api/v1/unauthorized/',
-                                       '/api/v1/forbidden/'])
-    if _require_auth is None:
-        return
-    if auth.authorization_header(request):
-        abort(401)
-        return
-    if auth.current_user(request):
-        abort(403)
-        return
 
 
 if __name__ == "__main__":
