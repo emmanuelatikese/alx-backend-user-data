@@ -31,3 +31,10 @@ def checks_user():
     """ return error
     """
     return abort(401)
+
+
+@app_views.route('/forbidden', strict_slashes=False)
+def checks_forbidden():
+    """ returns forbidden error
+    """
+    return abort(403)
