@@ -12,12 +12,12 @@ class Auth:
         """
         return False
 
-    def authorization_header(self, request: flask.request = None) -> None:
+    def authorization_header(self, request = None) -> None:
         """ returns None
         """
         return None
 
-    def current_user(self, request: flask.request = None) -> None:
+    def current_user(self, request = None) -> None:
         """Returns None
         """
         return None
