@@ -7,20 +7,17 @@ class Auth:
     """deals with everything auth
     """
 
-    def require_auth(self, path: str,
-                     excluded_paths: List[str]) -> bool | None:
+    def require_auth(self, path: str, excluded_paths: List[str]) -> bool:
         """returns False for now
         """
         return False
 
-    def authorization_header(self,
-                             request: flask.request = None) -> str | None:
+    def authorization_header(self, request: flask.request = None) -> None:
         """ returns None
         """
         return None
 
-    def current_user(self,
-                     request: flask.request = None) -> TypeVar('User') | None:
+    def current_user(self, request: flask.request = None) -> None:
         """Returns None
         """
         return None
