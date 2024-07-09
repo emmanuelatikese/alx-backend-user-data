@@ -12,12 +12,12 @@ class Auth:
         """
         return False
 
-    def authorization_header(self, request=None) -> None:
+    def authorization_header(self, request=None) -> str:
         """returns None
         """
         return
 
-    def current_user(self, request=None) -> None:
-        """returns None
+    def current_user(self, request=None) -> str:
+        """returns Nones
         """
         return
