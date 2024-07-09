@@ -37,7 +37,6 @@ def filtering_request() -> Optional[str]:
     if auth.current_user(request):
         abort(403)
         return
-        
 
 
 @app.errorhandler(404)
@@ -59,7 +58,6 @@ def forbidden(error) -> str:
     """ Forbidden handler
     """
     return jsonify({"error": "Forbidden"}), 403
-
 
 
 if __name__ == "__main__":
