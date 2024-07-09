@@ -8,16 +8,16 @@ class Auth:
     """
 
     def require_auth(self, path: str, excluded_paths: List[str]) -> bool:
-        """
+        """Returns False
         """
         return False
 
     def authorization_header(self, request=None) -> None:
-        """
+        """returns None
         """
         return
 
     def current_user(self, request=None) -> None:
-        """Returns None
+        """returns None
         """
         return
