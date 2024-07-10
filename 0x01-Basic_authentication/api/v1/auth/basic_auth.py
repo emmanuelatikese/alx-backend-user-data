@@ -2,6 +2,8 @@
 ''' This file contains function Basic Auth'''
 from api.v1.auth.auth import Auth
 import base64
+from typing import TypeVar
+from models.user import User
 
 
 class BasicAuth(Auth):
@@ -44,3 +46,21 @@ class BasicAuth(Auth):
             return None, None
         _split = decoded_base64_authorization_header.split(':')
         return _split[0], _split[1]
+
+    def user_object_from_credentials(self,
+                                     user_email: str, user_pwd: str
+                                     ) -> TypeVar('User'):
+        '''extracting user object from credentials'''
+        if not user_email or not isinstance(user_email, str):
+            return
+        if not user_pwd or not isinstance(user_pwd, str):
+            return
+        try:
+            new_users = User.search({'email': user_email})
+        except Exception:
+            return
+
+        for user in new_users:
+            if user.is_valid_password(user_pwd):
+                return user
+        return None
