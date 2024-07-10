@@ -4,6 +4,7 @@ File contains auth class
 """
 from flask import request
 from typing import List, TypeVar
+import fnmatch
 
 
 class Auth:
@@ -15,10 +16,10 @@ class Auth:
         if path is None or excluded_paths is None:
             return True
         path = path + '/' if path[len(path) - 1] != '/' else path
-        if path in excluded_paths:
-            return False
-        else:
-            return True
+        for pt in excluded_paths:
+            if fnmatch.fnmatch(path, pt):
+                return False
+        return True
 
     def authorization_header(self, request=None) -> str:
         """returns None
