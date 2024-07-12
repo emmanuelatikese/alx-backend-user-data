@@ -34,7 +34,9 @@ def filtering_request() -> Optional[str]:
     if auth is None:
         return
     all_path = ['/api/v1/status/',
-                '/api/v1/unauthorized/', '/api/v1/forbidden/']
+                '/api/v1/unauthorized/', '/api/v1/forbidden/',
+                '/api/v1/auth_session/login/'
+                ]
     if not auth.require_auth(request.path, all_path):
         return
     if not auth.authorization_header(request):
@@ -42,6 +44,9 @@ def filtering_request() -> Optional[str]:
         return
     if not auth.current_user(request):
         abort(403)
+        return
+    if auth.authorization_header(request) and auth.session_cookie(request):
+        abort(401)
         return
     request.current_user = auth.current_user(request)
 
