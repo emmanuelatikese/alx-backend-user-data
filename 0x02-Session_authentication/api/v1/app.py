@@ -39,11 +39,14 @@ def filtering_request() -> Optional[str]:
                 ]
     if not auth.require_auth(request.path, all_path):
         return
-    if not auth.authorization_header(request) and not auth.session_cookie(request):
+    if not auth.authorization_header(request):
         abort(401)
         return
     if not auth.current_user(request):
         abort(403)
+        return
+    if not auth.authorization_header(request) and not auth.session_cookie(request):
+        abort(401)
         return
     request.current_user = auth.current_user(request)
 
