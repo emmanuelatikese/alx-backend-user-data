@@ -25,6 +25,7 @@ elif getenv("AUTH_TYPE") == 'seesion_auth':
     from api.v1.auth.session_auth import SessionAuth
     auth = SessionAuth()
 
+
 @app.before_request
 def filtering_request() -> Optional[str]:
     """ Filter requests based on authentication
