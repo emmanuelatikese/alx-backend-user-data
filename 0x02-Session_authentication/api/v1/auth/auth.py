@@ -5,6 +5,7 @@ File contains auth class
 from flask import request
 from typing import List, TypeVar
 import fnmatch
+from os import getenv
 
 
 class Auth:
@@ -32,3 +33,12 @@ class Auth:
         """returns Nones
         """
         return None
+
+    def session_cookie(self, request=None):
+        '''dealing with session cookies'''
+        if not request:
+            return
+        _my_session_id = getenv('SESSION_NAME')
+        dict_cookie = dict(request.cookies)
+        val = dict_cookie.get(_my_session_id)
+        return val if val else None
