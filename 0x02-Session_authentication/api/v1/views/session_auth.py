@@ -18,9 +18,9 @@ def session_auth():
     try:
         all_users = User.search({"email": email})
     except Exception:
-        return jsonify({"error": "no user found for this email"}), 401
+        return jsonify({"error": "no user found for this email"}), 404
     if not all_users:
-        return jsonify({"error": "no user found for this email"}), 401
+        return jsonify({"error": "no user found for this email"}), 404
     for user in all_users:
         cur_user = user if user.is_valid_password(password) else None
     if not cur_user:
