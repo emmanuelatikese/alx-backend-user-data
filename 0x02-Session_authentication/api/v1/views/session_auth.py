@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """all basic authorizations"""
-from flask import request, jsonify
+from flask import request, jsonify, abort
 from os import getenv
 from api.v1.views import app_views
 from models.user import User
@@ -31,3 +31,14 @@ def session_auth():
     res = jsonify(cur_user.to_json())
     res.set_cookie(session_name, session_id)
     return res
+
+
+@app_views.route("/api/v1/auth_session/logout",
+                 methods=["DELETE"], strict_slashes=False)
+def logout_session():
+    '''basic login method'''
+    from api.v1.app import auth
+    _des = auth.destroy_session(request)
+    if not _des:
+        abort(404)
+    return jsonify({}), 200
