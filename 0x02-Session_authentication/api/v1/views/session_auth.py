@@ -10,9 +10,9 @@ from models.user import User
 def session_auth():
     '''handles authentications'''
     email = request.form.get('email')
-    password = request.form.get('password')
     if not email:
         return jsonify({"error": "email missing"}), 400
+    password = request.form.get('password')
     if not password:
         return jsonify({"error": "password missing"}), 400
     try:
