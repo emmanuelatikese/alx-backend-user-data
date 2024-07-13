@@ -45,6 +45,6 @@ class SessionAuth(Auth):
             return False
         try:
             del self.user_id_by_session_id[val_cookie]
-        except Exception as e:
-            return
+        except KeyError:
+            pass
         return True
