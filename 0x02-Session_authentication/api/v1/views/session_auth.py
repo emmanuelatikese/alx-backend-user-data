@@ -8,7 +8,7 @@ from models.user import User
 
 @app_views.route("/auth_session/login", methods=['POST'], strict_slashes=False)
 def session_auth():
-    '''handles authentications'''
+    '''handles authorization'''
     email = request.form.get('email')
     if not email:
         return jsonify({"error": "email missing"}), 400
@@ -25,7 +25,9 @@ def session_auth():
         cur_user = user if user.is_valid_password(password) else None
     if not cur_user:
         return jsonify({"error": "wrong password"}), 401
+    from api.v1.app import auth
+    session_id = auth.create_session(cur_user.id)
     session_name = getenv('SESSION_NAME')
     res = jsonify(cur_user.to_json())
-    res.set_cookie(session_name, cur_user.id)
+    res.set_cookie(session_name, session_id)
     return res
