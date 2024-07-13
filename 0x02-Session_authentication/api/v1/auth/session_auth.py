@@ -35,7 +35,7 @@ class SessionAuth(Auth):
         return User.get(_key) if _key else None
 
 
-@app_views.route("/auth_session/login",  methods=['POST'], strict_slashes=False)
+@app_views.route("/auth_session/login", methods=['POST'], strict_slashes=False)
 def session_auth():
     '''handles authentications'''
     email = request.form.get('email')
