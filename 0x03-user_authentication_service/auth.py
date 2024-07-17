@@ -51,7 +51,7 @@ class Auth:
         '''
         return uuid.uuid4()
 
-    def generate_uuid(self) -> uuid.uuid4:
+    def generate_uuid(self) -> str:
         '''public method
         '''
-        self._generate_uuid()
+        return str(self._generate_uuid())
