@@ -51,3 +51,13 @@ class DB:
         if not filtered_user:
             raise NoResultFound
         return filtered_user
+
+    def update_user(self, user_id: int, **kwargs) -> User:
+        """function to update user"""
+        filter_user = self.find_user_by(id=user_id)
+        for ky in kwargs.keys():
+            if not hasattr(User, ky):
+                raise ValueError
+        for k, v in kwargs.items():
+            setattr(filter_user, k, v)
+        return
