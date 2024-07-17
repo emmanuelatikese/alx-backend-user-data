@@ -52,7 +52,7 @@ class DB:
             raise NoResultFound
         return filtered_user
 
-    def update_user(self, user_id: int, **kwargs) -> User:
+    def update_user(self, user_id: int, **kwargs) -> None:
         """function to update user"""
         filter_user = self.find_user_by(id=user_id)
         for ky in kwargs.keys():
