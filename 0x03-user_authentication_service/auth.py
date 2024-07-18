@@ -80,8 +80,10 @@ class Auth:
         '''destroy session
         '''
         try:
-            upd = self._db.update_user(user_id, session_id=None)
-            if not upd:
-                return
+            user = self._db.find_user_by(user_id=user_id)
+            if user:
+                upd = self._db.update_user(user_id, session_id=None)
+                if not upd:
+                    return
         except Exception:
             return
