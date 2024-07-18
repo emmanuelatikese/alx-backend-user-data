@@ -58,15 +58,14 @@ def logout():
     '''
     _cookie = request.cookies.get('session_id', None)
     if _cookie:
-        try:
-            user = AUTH.get_user_from_session_id(_cookie)
-            if user:
-                AUTH.destroy_session(user.id)
-                return redirect('/')
-            else:
-                abort(403)
-        except Exception:
-            return
+        user = AUTH.get_user_from_session_id(_cookie)
+        if user:
+            AUTH.destroy_session(user.id)
+            return redirect('/')
+        else:
+            abort(403)
+    return
+
 
 
 if __name__ == '__main__':
