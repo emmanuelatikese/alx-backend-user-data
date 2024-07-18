@@ -75,3 +75,13 @@ class Auth:
             return user
         except Exception:
             return
+
+    def destory_session(self, user_id: int):
+        '''destroy session
+        '''
+        try:
+            upd = self._db.update_user(user_id, session_id=None)
+            if not upd:
+                return
+        except Exception:
+            return
