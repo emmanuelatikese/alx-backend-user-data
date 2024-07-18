@@ -94,6 +94,6 @@ class Auth:
                 token = _generate_uuid()
                 upd = self._db.update_user(user.id, reset_token=token)
                 if not upd:
-                    return token
+                    return str(token)
         except ValueError:
             return
