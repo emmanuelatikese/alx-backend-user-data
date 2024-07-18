@@ -70,9 +70,9 @@ def profile() -> str:
     '''
     _cookie = request.cookies.get('session_id', None)
     user = AUTH.get_user_from_session_id(_cookie)
-    if user:
+    if user and _cookie:
         return jsonify({"email": user.email}), 200
-
+    abort(403)
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
