@@ -3,7 +3,7 @@
 '''
 from flask import Flask, jsonify, request, abort, make_response, redirect
 from auth import Auth
-from users import User
+from user import User
 
 
 app = Flask(__name__)
