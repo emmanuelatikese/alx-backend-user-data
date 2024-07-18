@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 '''settting up flask
 '''
-from flask import Flask, jsonify, request, abort, make_response
+from flask import Flask, jsonify, request, abort, make_response, redirect
 from auth import Auth
 from users import User
 
@@ -50,6 +50,23 @@ def login():
         res.set_cookie('session_id', sess)
         return res
     return abort(401)
+
+
+@app.route('/sessions', methods=['DELETE'], strict_slashes=False)
+def logout():
+    '''does everything logout
+    '''
+    _cookie = request.cookies.get('session_id')
+    if _cookie:
+        try:
+            user = AUTH.get_user_from_session_id(_cookie)
+            if user:
+                AUTH.destroy_session(user.id)
+                redirect('/')
+            else:
+                abort(403)
+        except Exception:
+            return
 
 
 if __name__ == '__main__':
