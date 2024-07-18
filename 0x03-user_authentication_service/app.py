@@ -56,7 +56,7 @@ def login():
 def logout():
     '''does everything logout
     '''
-    _cookie = request.cookies.get('session_id')
+    _cookie = request.cookies.get('session_id', None)
     if _cookie:
         try:
             user = AUTH.get_user_from_session_id(_cookie)
