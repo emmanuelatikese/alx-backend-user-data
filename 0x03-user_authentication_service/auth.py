@@ -76,7 +76,7 @@ class Auth:
         except Exception:
             return
 
-    def destory_session(self, user_id: int):
+    def destory_session(self, user_id: int) -> None:
         '''destroy session
         '''
         try:
